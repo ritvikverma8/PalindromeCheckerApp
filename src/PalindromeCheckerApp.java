@@ -6,29 +6,35 @@ public class PalindromeCheckerApp {
 
         Scanner scan = new Scanner(System.in);
 
-
         System.out.print("Enter a string: ");
-        String org = scan.nextLine();
+        String org = scan.nextLine().toLowerCase();
 
+        char[] chars = org.toCharArray();
 
-        String rev = "";
+        int left  = 0;
+        int right = chars.length - 1;
 
-        for (int i = org.length() - 1; i >= 0; i--) {
-            rev = rev + org.charAt(i);
+        boolean isPalindrome = true;
+
+        while (left < right) {
+            if (chars[left] != chars[right]) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
         }
 
-
         System.out.println("Original : " + org);
-        System.out.println("Reversed : " + rev);
+        System.out.println("Char Array : " + java.util.Arrays.toString(chars));
 
-        if (org.equalsIgnoreCase(rev)) {
-            System.out.println("Result   : \"" + org + "\" is a Palindrome.");
+        if (isPalindrome) {
+            System.out.println("Result : \"" + org + "\" is a Palindrome.");
         } else {
-            System.out.println("Result   : \"" + org + "\" is NOT a Palindrome.");
+            System.out.println("Result : \"" + org + "\" is NOT a Palindrome.");
         }
 
         scan.close();
-
     }
 
 }
