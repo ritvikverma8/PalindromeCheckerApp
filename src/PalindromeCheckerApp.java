@@ -19,17 +19,18 @@ public class PalindromeCheckerApp {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Enter a string: ");
-        String org = scan.nextLine().toLowerCase();
+        String input = scan.nextLine();
 
+        String org = input.toLowerCase().replaceAll("[^a-z0-9]", "");
 
         boolean isPalindrome = checkPalindrome(org, 0, org.length() - 1);
 
         System.out.println();
 
         if (isPalindrome) {
-            System.out.println("Result : \"" + org + "\" is a Palindrome.");
+            System.out.println("Result : \"" + input + "\" is a Palindrome.");
         } else {
-            System.out.println("Result : \"" + org + "\" is NOT a Palindrome.");
+            System.out.println("Result : \"" + input + "\" is NOT a Palindrome.");
         }
 
         scan.close();
