@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class PalindromeCheckerApp {
 
@@ -10,25 +12,30 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String org = scan.nextLine().toLowerCase();
 
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        for (char c : org.toCharArray()) {
-            stack.push(c);
+        for (int i = 0; i < org.length(); i++) {
+            queue.add(org.charAt(i));
+            stack.push(org.charAt(i));
         }
 
-        String rev = "";
+        boolean isPalindrome = true;
 
-        while (!stack.isEmpty()) {
-            rev = rev + stack.pop();
+        while (!queue.isEmpty() && !stack.isEmpty()) {
+            char fromQueue = queue.remove();
+            char fromStack = stack.pop();
+            if (fromQueue != fromStack) {
+                isPalindrome = false;
+            }
         }
 
-        System.out.println("Original : " + org);
-        System.out.println("Reversed : " + rev);
+        System.out.println();
 
-        if (org.equals(rev)) {
-            System.out.println("Result   : \"" + org + "\" is a Palindrome.");
+        if (isPalindrome) {
+            System.out.println("Result : \"" + org + "\" is a Palindrome.");
         } else {
-            System.out.println("Result   : \"" + org + "\" is NOT a Palindrome.");
+            System.out.println("Result : \"" + org + "\" is NOT a Palindrome.");
         }
 
         scan.close();
