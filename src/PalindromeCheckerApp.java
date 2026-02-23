@@ -5,23 +5,29 @@ public class PalindromeCheckerApp {
     public static void main(String[] args){
 
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
-        int k=1;
 
-        for(int i =0 ; i < input.length()/2 ; i++){
-            if(input.charAt(i) != input.charAt((input.length())-i-1)){
-                k=-1;
-                break;
-            }else{
-                k=1;
-            }
+
+        System.out.print("Enter a string: ");
+        String org = scan.nextLine();
+
+
+        String rev = "";
+
+        for (int i = org.length() - 1; i >= 0; i--) {
+            rev = rev + org.charAt(i);
         }
-        System.out.println("Input Text : "+input);
-        if(k==1){
-            System.out.println("Is it a palindrome ? : true ");
-        }else{
-            System.out.println("Is it a palindrome ? : false ");
+
+
+        System.out.println("Original : " + org);
+        System.out.println("Reversed : " + rev);
+
+        if (org.equalsIgnoreCase(rev)) {
+            System.out.println("Result   : \"" + org + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result   : \"" + org + "\" is NOT a Palindrome.");
         }
+
+        scan.close();
 
     }
 
