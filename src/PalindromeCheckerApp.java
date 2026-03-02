@@ -1,39 +1,43 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
-    static boolean checkPalindrome(String org, int left, int right) {
-        if (left >= right) {
-            return true;
+    static class PalindromeChecker {
+
+        private String normalize(String input) {
+            return input.toLowerCase().replaceAll("[^a-z0-9]", "");
         }
 
-        if (org.charAt(left) != org.charAt(right)) {
-            return false;
-        }
+        public boolean checkPalindrome(String input) {
+            String org = normalize(input);
+            Stack<Character> stack = new Stack<>();
 
-        return checkPalindrome(org, left + 1, right - 1);
+            for (int i = 0; i < org.length(); i++) {
+                stack.push(org.charAt(i));
+            }
+
+            String rev = "";
+            while (!stack.isEmpty()) {
+                rev += stack.pop();
+            }
+
+            return org.equals(rev);
+        }
     }
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Enter a string: ");
+        System.out.print("Input : ");
         String input = scan.nextLine();
 
-        String org = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
 
-        boolean isPalindrome = checkPalindrome(org, 0, org.length() - 1);
-
-        System.out.println();
-
-        if (isPalindrome) {
-            System.out.println("Result : \"" + input + "\" is a Palindrome.");
-        } else {
-            System.out.println("Result : \"" + input + "\" is NOT a Palindrome.");
-        }
+        System.out.println("Is Palindrome : " + result);
 
         scan.close();
     }
-
 }
